@@ -142,7 +142,7 @@ const Home: NextPage = () => {
                   className="sm:text-4xl text-3xl font-bold text-slate-900 mx-auto"
                   ref={bioRef}
                 >
-                  Your generated bios
+                  Your generated answer
                 </h2>
               </div>
               <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
@@ -152,7 +152,7 @@ const Home: NextPage = () => {
                     onClick={() => {
                       // @ts-ignore
                       navigator.clipboard.writeText(generatedBios);
-                      toast("Bio copied to clipboard", {
+                      toast("Result copied to clipboard", {
                         icon: "✂️",
                       });
                     }}
