@@ -70,6 +70,15 @@ const Home: NextPage = () => {
     setLoading(false);
   };
 
+  // util helper to convert new lines to <br /> tags
+  const convertNewLines = (text: string) =>
+    text.split("\n").map((line, i) => (
+      <span key={i}>
+        {line}
+        <br />
+      </span>
+    ));
+
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
@@ -157,7 +166,12 @@ const Home: NextPage = () => {
                       });
                     }}
                   >
-                    <p>{generatedBios}</p>
+                    <p>
+                      {
+                        // @ts-ignore
+                        convertNewLines(generatedBios)
+                      }
+                    </p>
                   </div>
                 )}
               </div>
