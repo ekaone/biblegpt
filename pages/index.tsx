@@ -98,9 +98,9 @@ const Home: NextPage = () => {
               className="mb-5 sm:mb-0"
             />
             <p className="text-left font-medium">
-              Write your question{" "}
+              Write your question or topic{" "}
               <span className="text-slate-500">
-                (or write a few sentences about your topic)
+                (and you can write with your own language)
               </span>
               .
             </p>
@@ -157,7 +157,7 @@ const Home: NextPage = () => {
               <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
                 {generatedBios && (
                   <div
-                    className="bg-white rounded-xl shadow-md hover:bg-gray-100 transition cursor-copy border p-4"
+                    className="text-justify bg-white rounded-xl shadow-md hover:bg-gray-100 transition cursor-copy border p-4"
                     onClick={() => {
                       // @ts-ignore
                       navigator.clipboard.writeText(generatedBios);
