@@ -172,6 +172,9 @@ const Home: NextPage = () => {
                         convertNewLines(generatedBios)
                       }
                     </p>
+                    <blockquote className="mt-4 text-sm border-l-4 border-slate-300 pl-3 text-slate-400">
+                      BibleGPT
+                    </blockquote>
                   </div>
                 )}
               </div>
