@@ -12,7 +12,7 @@ export default function Footer() {
           rel="noreferrer"
           className="font-bold hover:underline transition underline-offset-2"
         >
-          ChatGPT{" "}
+          GPT-4{" "}
         </Link>
       </div>
       <div className="flex space-x-4 pb-4 sm:pb-0">
