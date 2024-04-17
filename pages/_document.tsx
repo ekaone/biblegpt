@@ -1,4 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
+import Metrics from "@/pages/metrics";
 
 class MyDocument extends Document {
   render() {
@@ -12,7 +13,7 @@ class MyDocument extends Document {
           <meta itemProp="name" content="BibleGPT" />
           <meta
             property="og:site_name"
-            content="https://twekaone-biblegpt.vercel.app"
+            content="https://biblegpt.prasetia.me"
           />
           <meta
             property="og:description"
@@ -20,13 +21,10 @@ class MyDocument extends Document {
           />
           <meta
             itemProp="image"
-            content="https://twekaone-biblegpt.vercel.app/og-image.png"
+            content="https://biblegpt.prasetia.me/og-image.png"
           />
           {/* <!-- Facebook Meta Tags --> */}
-          <meta
-            property="og:url"
-            content="https://twekaone-biblegpt.vercel.app"
-          />
+          <meta property="og:url" content="https://biblegpt.prasetia.me" />
           <meta property="og:type" content="website" />
           <meta property="og:title" content="BibleGPT" />
           <meta
@@ -35,7 +33,7 @@ class MyDocument extends Document {
           />
           <meta
             property="og:image"
-            content="https://twekaone-biblegpt.vercel.app/og-image.png"
+            content="https://biblegpt.prasetia.me/og-image.png"
           />
           {/* <!-- Twitter Meta Tags --> */}
           <meta name="twitter:card" content="summary_large_image" />
@@ -46,12 +44,13 @@ class MyDocument extends Document {
           />
           <meta
             property="og:image"
-            content="https://twekaone-biblegpt.vercel.app/og-image.png"
+            content="https://biblegpt.prasetia.me/og-image.png"
           />
           <meta
             name="twitter:image"
-            content="https://twekaone-biblegpt.vercel.app/og-image.png"
+            content="https://biblegpt.prasetia.me/og-image.png"
           />
+          <Metrics />
         </Head>
         <body>
           <Main />
