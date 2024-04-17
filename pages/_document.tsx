@@ -50,11 +50,11 @@ class MyDocument extends Document {
             name="twitter:image"
             content="https://biblegpt.prasetia.me/og-image.png"
           />
-          <Metrics />
         </Head>
         <body>
           <Main />
           <NextScript />
+          <Metrics />
         </body>
       </Html>
     );
