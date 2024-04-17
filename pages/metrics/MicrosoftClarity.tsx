@@ -4,8 +4,6 @@ import Script from "next/script";
 import React from "react";
 
 const MicrosoftClarity = () => {
-  console.log("MICROSOFT_CLARITY", process.env.NEXT_PUBLIC_MICROSOFT_CLARITY);
-
   return (
     <Script
       id="microsoft-clarity-init"
