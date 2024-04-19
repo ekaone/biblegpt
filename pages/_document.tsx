@@ -1,5 +1,4 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
-import Metrics from "@/pages/metrics";
 
 class MyDocument extends Document {
   render() {
@@ -54,7 +53,6 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <Metrics />
         </body>
       </Html>
     );
