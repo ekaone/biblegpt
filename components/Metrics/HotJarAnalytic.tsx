@@ -5,7 +5,7 @@ function HotJarAnalytic() {
   return (
     <>
       <Script
-        id="show-banner"
+        id="hotjar-init"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `(function(h,o,t,j,a,r){
