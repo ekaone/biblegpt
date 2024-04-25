@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Bible GPT is a simnple app to train a GPT-4 model on the Bible. The goal is to create a model that can generate text that is similar to the Bible. The model is trained on the King James Version of the Bible, which is in the public domain.
+Bible GPT is a simple app that uses GPT-4 model. Make sure double check for the output. The model is not perfect and sometimes it can generate wrong output. 
 
 ## Installation
 
@@ -19,4 +19,4 @@ yarn install
 ```
 yarn start
 ```
-5. Open your browser and go to `http://localhost:3002`
+5. Open your browser and go to `http://localhost:3000`
