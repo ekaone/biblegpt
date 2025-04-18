@@ -9,7 +9,10 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["var(--font-sour-gummy)", ...fontFamily.sans],
+      },
+    },
   },
-  plugins: [require("@tailwindcss/forms"), require("@headlessui/tailwindcss")],
 };
