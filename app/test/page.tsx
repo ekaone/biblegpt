@@ -2,26 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { useQuizStore } from "@/lib/store/quizStore";
 
 export default function TestPage() {
-  const [questions, setQuestions] = useState<any[]>([]);
+  const { questions, setQuestions, clearQuestions } = useQuizStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Load questions from localStorage on component mount
-  useEffect(() => {
-    const savedQuestions = localStorage.getItem("bibleQuizQuestions");
-    if (savedQuestions) {
-      setQuestions(JSON.parse(savedQuestions));
-    }
-  }, []);
-
-  // Save questions to localStorage whenever they change
-  useEffect(() => {
-    if (questions.length > 0) {
-      localStorage.setItem("bibleQuizQuestions", JSON.stringify(questions));
-    }
-  }, [questions]);
 
   const fetchQuestions = async () => {
     try {
@@ -49,11 +35,6 @@ export default function TestPage() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const clearQuestions = () => {
-    localStorage.removeItem("bibleQuizQuestions");
-    setQuestions([]);
   };
 
   return (
