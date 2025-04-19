@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Sour_Gummy } from "next/font/google";
+import { Sour_Gummy, Montserrat } from "next/font/google";
 import "./globals.css";
 
 const sourGummy = Sour_Gummy({
@@ -7,10 +7,15 @@ const sourGummy = Sour_Gummy({
   subsets: ["latin"],
 });
 
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: {
-    default: "BibleGPT",
-    template: "%s | BibleGPT",
+    default: "Bible GPT",
+    template: "%s | Bible GPT",
   },
   description:
     "An AI-powered Bible study assistant that helps you explore and understand the scriptures better.",
@@ -73,7 +78,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${sourGummy.variable} antialiased`}>{children}</body>
+      <body
+        className={`${sourGummy.variable} ${montserrat.variable} antialiased rainbow-gradient-bg`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

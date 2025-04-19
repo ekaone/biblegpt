@@ -6,6 +6,7 @@ import { useQuizStore } from "@/lib/store/quiz-store";
 import { bibleQuizQuestions } from "@/data/bible-quiz-questions";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import { Leaderboard } from "@/components/quiz/leaderboard";
 
 export default function Quiz() {
   const {
@@ -92,31 +93,19 @@ export default function Quiz() {
   };
 
   return (
-    <div className="min-h-screen rainbow-gradient-bg py-8">
-      <div className="quiz-container">
+    <div className="min-h-screen py-8 flex items-center justify-center">
+      <div className="w-full max-w-xl mx-auto px-4">
         {gameState === "playing" ? (
           <>
-            <div className="flex justify-between items-center mb-8">
-              <div>
-                <h1 className="text-2xl font-bold text-primary">Bible Quiz</h1>
-                <p className="text-muted-foreground">
-                  Test your biblical knowledge
-                </p>
-              </div>
-              <div className="flex items-center gap-4">
-                <button
-                  onClick={() => setShowLeaderboard(true)}
-                  className="text-primary hover:text-primary/80 transition-colors"
-                >
-                  View Leaderboard
-                </button>
-                <div className="text-xl font-semibold text-primary">
-                  Score: {score}
-                </div>
+            <div className="relative w-full h-3 bg-white/30 rounded-full mb-12">
+              <div
+                className="absolute top-0 left-0 h-full bg-gradient-to-r from-indigo-600 to-violet-500 rounded-full transition-all duration-300"
+                style={{ width: `${progress}%` }}
+              />
+              <div className="absolute -top-10 right-0 text-indigo-900 font-medium text-xl">
+                {currentQuestionIndex + 1}/{bibleQuizQuestions.length}
               </div>
             </div>
-
-            <Progress value={progress} className="mb-8 progress-bar" />
 
             <AnimatePresence mode="wait">
               <motion.div
@@ -124,31 +113,37 @@ export default function Quiz() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="quiz-card"
+                className="w-full"
               >
-                <span className="question-number">
-                  Question {currentQuestionIndex + 1}
-                </span>
-                <h2 className="question-text">{currentQuestion.question}</h2>
+                <h2 className="text-indigo-900 text-2xl md:text-3xl font-semibold mb-10 text-center">
+                  {currentQuestion.question}
+                </h2>
 
-                <div className="grid gap-4">
+                <div className="space-y-4">
                   {Object.entries(currentQuestion.options).map(
                     ([key, value]) => {
                       const isSelected = selectedAnswer === key;
                       const isCorrectAnswer =
                         currentQuestion.correctAnswer === key;
-                      let optionClass = "quiz-option";
+                      let optionClass =
+                        "w-full text-left px-8 py-5 rounded-xl border-2 transition-all duration-200 text-lg";
 
                       if (selectedAnswer) {
                         if (isSelected) {
                           optionClass += isCorrectAnswer
-                            ? " correct"
-                            : " incorrect";
+                            ? " bg-green-100 border-green-500 text-green-700"
+                            : " bg-red-100 border-red-500 text-red-700";
                         } else if (isCorrectAnswer) {
-                          optionClass += " correct";
+                          optionClass +=
+                            " bg-green-100 border-green-500 text-green-700";
+                        } else {
+                          optionClass +=
+                            " bg-white/50 border-indigo-200 text-indigo-900";
                         }
-                      } else if (isSelected) {
-                        optionClass += " selected";
+                      } else {
+                        optionClass += isSelected
+                          ? " bg-indigo-100 border-indigo-500 text-indigo-900"
+                          : " bg-white/50 border-indigo-200 text-indigo-900 hover:bg-indigo-50 hover:border-indigo-400";
                       }
 
                       return (
@@ -158,7 +153,7 @@ export default function Quiz() {
                           disabled={!!selectedAnswer}
                           className={optionClass}
                         >
-                          {key}) {value}
+                          {value}
                         </button>
                       );
                     }
@@ -168,28 +163,26 @@ export default function Quiz() {
                 <button
                   onClick={handleNextQuestion}
                   disabled={!selectedAnswer}
-                  className={`w-full mt-6 py-4 rounded-xl text-lg font-semibold transition-colors ${
+                  className={`w-full mt-10 py-5 rounded-xl text-xl font-medium transition-all duration-200 ${
                     selectedAnswer
-                      ? "bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg"
-                      : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                      ? "bg-gradient-to-r from-indigo-600 to-violet-500 text-white hover:from-indigo-700 hover:to-violet-600 shadow-md"
+                      : "bg-indigo-100/50 text-indigo-300 cursor-not-allowed"
                   }`}
                 >
-                  {currentQuestionIndex < bibleQuizQuestions.length - 1
-                    ? "Next Question →"
-                    : "Finish Quiz 🎉"}
+                  Next
                 </button>
 
                 {selectedAnswer && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mt-8"
+                    className="mt-10"
                   >
-                    <div className="p-6 bg-secondary rounded-xl mb-4">
-                      <p className="text-lg font-semibold mb-2">
+                    <div className="p-8 bg-white/70 rounded-xl backdrop-blur-sm">
+                      <p className="text-xl font-medium mb-3 text-indigo-900">
                         {isAnswerCorrect ? "✨ Correct!" : "❌ Incorrect"}
                       </p>
-                      <p className="text-muted-foreground">
+                      <p className="text-indigo-700 text-lg">
                         {currentQuestion.explanation}
                       </p>
                     </div>
@@ -202,22 +195,26 @@ export default function Quiz() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="quiz-card text-center"
+            className="w-full"
           >
-            <h2 className="text-3xl font-bold text-primary mb-4">
+            <h2 className="text-indigo-900 text-3xl md:text-4xl font-semibold mb-6 text-center">
               Quiz Completed! 🎉
             </h2>
-            <p className="text-2xl mb-6">Your final score: {score} points</p>
+            <p className="text-2xl text-indigo-800 mb-8 text-center">
+              Your final score: {score} points
+            </p>
 
             {badges.length > 0 && (
-              <div className="mb-8">
-                <h3 className="text-lg font-semibold mb-3">Badges Earned:</h3>
+              <div className="mb-10">
+                <h3 className="text-xl font-semibold mb-4 text-indigo-900 text-center">
+                  Badges Earned:
+                </h3>
                 <div className="flex flex-wrap gap-2 justify-center">
                   {badges.map((badge) => (
                     <Badge
                       key={badge}
                       variant="secondary"
-                      className="text-sm px-3 py-1"
+                      className="text-lg px-4 py-2 bg-indigo-100 text-indigo-700 border-2 border-indigo-200"
                     >
                       {badge}
                     </Badge>
@@ -232,20 +229,20 @@ export default function Quiz() {
                 placeholder="Enter your name"
                 value={playerName}
                 onChange={(e) => setPlayerName(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-input focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-8 py-5 rounded-xl border-2 border-indigo-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-lg text-indigo-900 bg-white/70 backdrop-blur-sm placeholder:text-indigo-400"
               />
               <div className="flex gap-4">
                 <button
                   onClick={handleRestart}
-                  className="flex-1 bg-emerald-600 text-white py-3 rounded-xl hover:bg-emerald-700 transition-colors shadow-md"
+                  className="flex-1 bg-gradient-to-r from-indigo-600 to-violet-500 text-white py-5 rounded-xl hover:from-indigo-700 hover:to-violet-600 transition-colors shadow-md text-xl font-medium"
                 >
                   Try Again
                 </button>
                 <button
                   onClick={handleViewLeaderboard}
-                  className="flex-1 bg-secondary text-primary py-3 rounded-xl hover:bg-secondary/80 transition-colors"
+                  className="flex-1 bg-white/70 backdrop-blur-sm text-indigo-900 py-5 rounded-xl border-2 border-indigo-200 hover:bg-indigo-50 hover:border-indigo-400 transition-colors text-xl font-medium"
                 >
-                  Save
+                  Save Score
                 </button>
               </div>
             </div>
@@ -253,55 +250,11 @@ export default function Quiz() {
         )}
 
         {showLeaderboard && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-8 quiz-card"
-          >
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-bold text-primary">Leaderboard</h3>
-              <div className="flex gap-2">
-                <button
-                  onClick={handleClearLeaderboard}
-                  className="bg-red-600 text-white px-4 py-2 rounded-xl hover:bg-red-700 transition-colors shadow-md"
-                >
-                  Clear Leaderboard
-                </button>
-                <button
-                  onClick={() => setShowLeaderboard(false)}
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-            <div className="space-y-4">
-              {leaderboard.map((player) => (
-                <div
-                  key={player.id}
-                  className="flex justify-between items-center p-4 bg-secondary rounded-xl"
-                >
-                  <div>
-                    <p className="font-semibold">{player.name}</p>
-                    <div className="flex gap-2 mt-1">
-                      {player.badges.map((badge) => (
-                        <Badge
-                          key={badge}
-                          variant="default"
-                          className="text-xs"
-                        >
-                          {badge}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                  <p className="text-lg font-bold text-primary">
-                    {player.score} points
-                  </p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+          <Leaderboard
+            leaderboard={leaderboard}
+            onClear={handleClearLeaderboard}
+            onClose={() => setShowLeaderboard(false)}
+          />
         )}
       </div>
     </div>
