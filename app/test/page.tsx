@@ -1,11 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function TestPage() {
   const [questions, setQuestions] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Load questions from localStorage on component mount
+  useEffect(() => {
+    const savedQuestions = localStorage.getItem("bibleQuizQuestions");
+    if (savedQuestions) {
+      setQuestions(JSON.parse(savedQuestions));
+    }
+  }, []);
+
+  // Save questions to localStorage whenever they change
+  useEffect(() => {
+    if (questions.length > 0) {
+      localStorage.setItem("bibleQuizQuestions", JSON.stringify(questions));
+    }
+  }, [questions]);
 
   const fetchQuestions = async () => {
     try {
@@ -35,15 +51,34 @@ export default function TestPage() {
     }
   };
 
+  const clearQuestions = () => {
+    localStorage.removeItem("bibleQuizQuestions");
+    setQuestions([]);
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
-      <button
-        onClick={fetchQuestions}
-        disabled={loading}
-        className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-      >
-        {loading ? "Generating Questions..." : "Generate Bible Quiz Questions"}
-      </button>
+      <div className="flex gap-4 mb-4">
+        <Button
+          onClick={fetchQuestions}
+          disabled={loading}
+          className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+        >
+          {loading
+            ? "Generating Questions..."
+            : "Generate Bible Quiz Questions"}
+        </Button>
+
+        {questions.length > 0 && (
+          <Button
+            onClick={clearQuestions}
+            variant="destructive"
+            className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+          >
+            Clear Questions
+          </Button>
+        )}
+      </div>
 
       {error && (
         <div className="mt-4 p-4 bg-red-100 text-red-700 rounded-lg">
