@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useQuizStore } from "@/lib/store/quiz-store";
 import { bibleQuizQuestions } from "@/data/bible-quiz-questions";
-import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Leaderboard } from "@/components/quiz/leaderboard";
 
@@ -106,7 +105,6 @@ export default function Quiz() {
                 {currentQuestionIndex + 1}/{bibleQuizQuestions.length}
               </div>
             </div>
-
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentQuestionIndex}

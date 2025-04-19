@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
-import { Sour_Gummy, Montserrat } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
-
-const sourGummy = Sour_Gummy({
-  variable: "--font-sour-gummy",
-  subsets: ["latin"],
-});
+import AnimatedBackground from "@/components/animated-background";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -78,9 +74,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${sourGummy.variable} ${montserrat.variable} antialiased rainbow-gradient-bg`}
-      >
+      <body className={`${montserrat.variable} antialiased`}>
+        <AnimatedBackground />
         {children}
       </body>
     </html>

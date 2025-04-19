@@ -83,6 +83,9 @@ dependencies:
   lucide-react:
     specifier: ^0.488.0
     version: 0.488.0(react@19.1.0)
+  luxon:
+    specifier: ^3.6.1
+    version: 3.6.1
   next:
     specifier: 15.3.1
     version: 15.3.1(react-dom@19.1.0)(react@19.1.0)
@@ -3726,6 +3729,11 @@ packages:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
     dependencies:
       react: 19.1.0
+    dev: false
+
+  /luxon@3.6.1:
+    resolution: {integrity: sha512-tJLxrKJhO2ukZ5z0gyjY1zPh3Rh88Ej9P7jNrZiHMUXHae1yvI2imgOZtL1TO8TW6biMMKfTtAOoEJANgtWBMQ==}
+    engines: {node: '>=12'}
     dev: false
 
   /math-intrinsics@1.1.0:

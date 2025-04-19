@@ -1,6 +1,6 @@
 "use client";
 
-import { ProfileCard } from "@/components/card/profile-card";
+// import { ProfileCard } from "@/components/card/profile-card";
 import ProfileCardTwo from "@/components/card/profile-card-two";
 
 export default function DemoPage() {

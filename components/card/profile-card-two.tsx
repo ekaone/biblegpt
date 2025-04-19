@@ -56,14 +56,11 @@ export default function ProfileCardTwo() {
 
       {/* Animated Footer - Now animating from top to bottom */}
       <div
-        className={`absolute left-0 right-0 bg-[#faf0e6] text-black py-4 px-6 mt-2 flex items-center justify-center rounded-b-[20px] rounded-t-[20px] transition-all duration-500 ease-in-out ${
+        className={`absolute left-0 right-0 bg-gray-900 bg-opacity-90 text-white py-4 px-6 mt-2 flex items-center justify-center rounded-b-[20px] rounded-t-[20px] transition-all duration-500 ease-in-out ${
           showFooter
             ? "top-full translate-y-0 opacity-100"
-            : "top-0 -translate-y-full opacity-0"
+            : "top-10 -translate-y-full opacity-0"
         }`}
-        style={{
-          boxShadow: showFooter ? "0 0 20px rgba(160, 255, 76, 0.5)" : "none",
-        }}
       >
         <Zap className="mr-2 h-5 w-5" />
         <span className="font-medium">Currently High on Creativity</span>

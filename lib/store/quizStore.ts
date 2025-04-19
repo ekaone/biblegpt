@@ -1,9 +1,16 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+interface Question {
+  question: string;
+  options: Record<string, string>;
+  correctAnswer: string;
+  explanation: string;
+}
+
 interface QuizState {
-  questions: any[];
-  setQuestions: (questions: any[]) => void;
+  questions: Question[];
+  setQuestions: (questions: Question[]) => void;
   clearQuestions: () => void;
 }
 

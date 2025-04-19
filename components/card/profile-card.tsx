@@ -14,7 +14,6 @@ interface ProfileCardProps {
 export function ProfileCard({
   name = "Jay Dwivedi",
   title = "Web Designer",
-  status = "available",
   onMessageClick,
 }: ProfileCardProps) {
   const [showCreativity, setShowCreativity] = useState(false);

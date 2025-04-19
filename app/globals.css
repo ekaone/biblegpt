@@ -45,7 +45,7 @@
 
 :root {
   --radius: 0.5rem;
-  --background: 0 0% 100%;
+  --background: 20 5.9% 90%;
   --foreground: 222.2 84% 4.9%;
   --card: 0 0% 100%;
   --card-foreground: 222.2 84% 4.9%;
@@ -119,7 +119,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[hsl(var(--background))] text-foreground;
   }
 }
 
