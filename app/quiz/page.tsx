@@ -125,7 +125,7 @@ export default function Quiz() {
                         currentQuestion.correctAnswer === key;
                       let optionClass =
                         "w-full py-5 px-6 rounded-2xl text-lg font-medium transition-all duration-200 cursor-pointer flex items-center shadow-sm border-2 ";
-                      let pastelBg = [
+                      const pastelBg = [
                         "bg-[#F7B267] border-[#F7B267] text-[#22223B]", // peach
                         "bg-[#B4E9D6] border-[#B4E9D6] text-[#22223B]", // mint
                         "bg-[#E9A6A6] border-[#E9A6A6] text-[#22223B]", // pink
