@@ -92,16 +92,16 @@ export default function Quiz() {
   };
 
   return (
-    <div className="min-h-screen py-8 flex items-center justify-center">
+    <div className="min-h-screen py-8 flex items-center justify-center font-sans">
       <div className="w-full max-w-xl mx-auto px-4">
         {gameState === "playing" ? (
           <>
-            <div className="relative w-full h-3 bg-white/30 rounded-full mb-12">
+            <div className="relative w-full h-3 bg-[#F2E9E4] rounded-full mb-12">
               <div
-                className="absolute top-0 left-0 h-full bg-gradient-to-r from-indigo-600 to-violet-500 rounded-full transition-all duration-300"
-                style={{ width: `${progress}%` }}
+                className="absolute top-0 left-0 h-full rounded-full transition-all duration-300 shadow-sm"
+                style={{ width: `${progress}%`, background: 'linear-gradient(90deg, #F7B267 0%, #B4E9D6 100%)' }}
               />
-              <div className="absolute -top-10 right-0 text-indigo-900 font-medium text-xl">
+              <div className="absolute -top-10 right-0 text-[#22223B] font-semibold text-xl">
                 {currentQuestionIndex + 1}/{bibleQuizQuestions.length}
               </div>
             </div>
@@ -113,37 +113,32 @@ export default function Quiz() {
                 exit={{ opacity: 0, y: -20 }}
                 className="w-full"
               >
-                <h2 className="text-indigo-900 text-2xl md:text-3xl font-semibold mb-10 text-center">
+                <h2 className="text-[#22223B] text-3xl md:text-4xl font-bold mb-10 text-center">
                   {currentQuestion.question}
                 </h2>
 
                 <div className="space-y-4">
                   {Object.entries(currentQuestion.options).map(
-                    ([key, value]) => {
+                    ([key, value], idx) => {
                       const isSelected = selectedAnswer === key;
                       const isCorrectAnswer =
                         currentQuestion.correctAnswer === key;
                       let optionClass =
-                        "w-full text-left px-8 py-5 rounded-xl border-2 transition-all duration-200 text-lg";
-
-                      if (selectedAnswer) {
-                        if (isSelected) {
-                          optionClass += isCorrectAnswer
-                            ? " bg-green-100 border-green-500 text-green-700"
-                            : " bg-red-100 border-red-500 text-red-700";
-                        } else if (isCorrectAnswer) {
-                          optionClass +=
-                            " bg-green-100 border-green-500 text-green-700";
-                        } else {
-                          optionClass +=
-                            " bg-white/50 border-indigo-200 text-indigo-900";
-                        }
+                        "w-full py-5 px-6 rounded-2xl text-lg font-medium transition-all duration-200 cursor-pointer flex items-center shadow-sm border-2 ";
+                      let pastelBg = [
+                        "bg-[#F7B267] border-[#F7B267] text-[#22223B]", // peach
+                        "bg-[#B4E9D6] border-[#B4E9D6] text-[#22223B]", // mint
+                        "bg-[#E9A6A6] border-[#E9A6A6] text-[#22223B]", // pink
+                        "bg-[#C3B6F7] border-[#C3B6F7] text-[#22223B]"  // lavender
+                      ];
+                      optionClass += pastelBg[idx % pastelBg.length] + " ";
+                      if (isSelected) {
+                        optionClass += isCorrectAnswer
+                          ? "ring-4 ring-[#B4E9D6] border-[#22223B]"
+                          : "ring-4 ring-[#E9A6A6] border-[#22223B] opacity-80";
                       } else {
-                        optionClass += isSelected
-                          ? " bg-indigo-100 border-indigo-500 text-indigo-900"
-                          : " bg-white/50 border-indigo-200 text-indigo-900 hover:bg-indigo-50 hover:border-indigo-400";
+                        optionClass += "hover:opacity-90 hover:shadow-md";
                       }
-
                       return (
                         <button
                           key={key}
@@ -151,21 +146,19 @@ export default function Quiz() {
                           disabled={!!selectedAnswer}
                           className={optionClass}
                         >
-                          {value}
+                          <span className="flex-1 text-left">{value}</span>
+                          {isSelected && (
+                            <span className="ml-4 text-2xl">{isCorrectAnswer ? "✔️" : "❌"}</span>
+                          )}
                         </button>
                       );
                     }
                   )}
                 </div>
-
                 <button
                   onClick={handleNextQuestion}
                   disabled={!selectedAnswer}
-                  className={`w-full mt-10 py-5 rounded-xl text-xl font-medium transition-all duration-200 ${
-                    selectedAnswer
-                      ? "bg-gradient-to-r from-indigo-600 to-violet-500 text-white hover:from-indigo-700 hover:to-violet-600 shadow-md"
-                      : "bg-indigo-100/50 text-indigo-300 cursor-not-allowed"
-                  }`}
+                  className={`w-full mt-10 py-5 rounded-2xl text-xl font-bold transition-all duration-200 shadow-md border-2 border-[#F7B267] ${selectedAnswer ? "bg-[#F7B267] text-[#22223B] hover:bg-[#F2E9E4]" : "bg-[#F2E9E4] text-[#C3B6F7] cursor-not-allowed"}`}
                 >
                   Next
                 </button>
@@ -176,11 +169,11 @@ export default function Quiz() {
                     animate={{ opacity: 1, y: 0 }}
                     className="mt-10"
                   >
-                    <div className="p-8 bg-white/70 rounded-xl backdrop-blur-sm">
-                      <p className="text-xl font-medium mb-3 text-indigo-900">
+                    <div className="p-8 bg-white/80 rounded-2xl shadow-lg border border-[#F2E9E4]">
+                      <p className="text-xl font-bold mb-3 text-[#22223B]">
                         {isAnswerCorrect ? "✨ Correct!" : "❌ Incorrect"}
                       </p>
-                      <p className="text-indigo-700 text-lg">
+                      <p className="text-[#4A4E69] text-lg">
                         {currentQuestion.explanation}
                       </p>
                     </div>
@@ -195,24 +188,24 @@ export default function Quiz() {
             animate={{ opacity: 1, scale: 1 }}
             className="w-full"
           >
-            <h2 className="text-indigo-900 text-3xl md:text-4xl font-semibold mb-6 text-center">
+            <h2 className="text-[#22223B] text-4xl md:text-5xl font-bold mb-6 text-center">
               Quiz Completed! 🎉
             </h2>
-            <p className="text-2xl text-indigo-800 mb-8 text-center">
+            <p className="text-2xl text-[#4A4E69] mb-8 text-center">
               Your final score: {score} points
             </p>
 
             {badges.length > 0 && (
               <div className="mb-10">
-                <h3 className="text-xl font-semibold mb-4 text-indigo-900 text-center">
+                <h3 className="text-xl font-semibold mb-4 text-[#22223B] text-center">
                   Badges Earned:
                 </h3>
                 <div className="flex flex-wrap gap-2 justify-center">
-                  {badges.map((badge) => (
+                  {badges.map((badge, idx) => (
                     <Badge
                       key={badge}
                       variant="secondary"
-                      className="text-lg px-4 py-2 bg-indigo-100 text-indigo-700 border-2 border-indigo-200"
+                      className={`text-lg px-4 py-2 rounded-full border-2 font-semibold shadow-sm ${["bg-[#F7B267] text-[#22223B] border-[#F7B267]","bg-[#B4E9D6] text-[#22223B] border-[#B4E9D6]","bg-[#E9A6A6] text-[#22223B] border-[#E9A6A6]","bg-[#C3B6F7] text-[#22223B] border-[#C3B6F7]"][idx%4]}`}
                     >
                       {badge}
                     </Badge>
@@ -227,18 +220,18 @@ export default function Quiz() {
                 placeholder="Enter your name"
                 value={playerName}
                 onChange={(e) => setPlayerName(e.target.value)}
-                className="w-full px-8 py-5 rounded-xl border-2 border-indigo-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-lg text-indigo-900 bg-white/70 backdrop-blur-sm placeholder:text-indigo-400"
+                className="w-full px-8 py-5 rounded-2xl border-2 border-[#F2E9E4] focus:border-[#F7B267] focus:ring-2 focus:ring-[#F7B267] text-lg text-[#22223B] bg-white/80 placeholder:text-[#C3B6F7] shadow-sm"
               />
               <div className="flex gap-4">
                 <button
                   onClick={handleRestart}
-                  className="flex-1 bg-gradient-to-r from-indigo-600 to-violet-500 text-white py-5 rounded-xl hover:from-indigo-700 hover:to-violet-600 transition-colors shadow-md text-xl font-medium"
+                  className="flex-1 bg-[#B4E9D6] text-[#22223B] py-5 rounded-2xl hover:bg-[#A0D9C7] transition-colors shadow-md text-xl font-bold border-2 border-[#B4E9D6]"
                 >
                   Try Again
                 </button>
                 <button
                   onClick={handleViewLeaderboard}
-                  className="flex-1 bg-white/70 backdrop-blur-sm text-indigo-900 py-5 rounded-xl border-2 border-indigo-200 hover:bg-indigo-50 hover:border-indigo-400 transition-colors text-xl font-medium"
+                  className="flex-1 bg-[#F7B267] text-[#22223B] py-5 rounded-2xl border-2 border-[#F7B267] hover:bg-[#F2E9E4] transition-colors shadow-md text-xl font-bold"
                 >
                   Save Score
                 </button>
