@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     const { count = 1 }: { count: number } = await req.json();
 
     const { object: questions } = await generateObject({
-      model: openai("gpt-4"),
+      model: openai("gpt-4.1-mini"),
       output: "array",
       schema: quizQuestionSchema,
       system: `You are an expert Bible scholar and quiz creator. Your task is to generate Bible quiz questions that are:
@@ -35,6 +35,7 @@ export async function POST(req: Request) {
       6. Have unique IDs starting from 1
       
       Guidelines for question creation:
+      - Questions should be unique and not repeat previous content
       - Questions should test both knowledge and understanding
       - Options should be plausible but only one should be correct
       - Explanations should include relevant Bible verses

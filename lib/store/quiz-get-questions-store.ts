@@ -14,7 +14,7 @@ interface QuizState {
   clearQuestions: () => void;
 }
 
-export const useQuizStore = create<QuizState>()(
+export const useGetQuestionsStore = create<QuizState>()(
   persist(
     (set) => ({
       questions: [],

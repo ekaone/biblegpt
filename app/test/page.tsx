@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useQuizStore } from "@/lib/store/quizStore";
+import { useGetQuestionsStore } from "@/lib/store/quiz-get-questions-store";
 
 export default function TestPage() {
-  const { questions, setQuestions, clearQuestions } = useQuizStore();
+  const { questions, setQuestions, clearQuestions } = useGetQuestionsStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
