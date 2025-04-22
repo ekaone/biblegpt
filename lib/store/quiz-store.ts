@@ -28,6 +28,19 @@ interface QuizState {
   resetGame: () => void;
 }
 
+interface Question {
+  question: string;
+  options: Record<string, string>;
+  correctAnswer: string;
+  explanation: string;
+}
+
+interface QuizState {
+  questions: Question[];
+  setQuestions: (questions: Question[]) => void;
+  clearQuestions: () => void;
+}
+
 export const useQuizStore = create<QuizState>()(
   persist(
     (set) => ({
@@ -62,11 +75,15 @@ export const useQuizStore = create<QuizState>()(
           badges: [],
           leaderboard: state.leaderboard,
         })),
+      questions: [],
+      setQuestions: (questions) => set({ questions }),
+      clearQuestions: () => set({ questions: [] }),
     }),
     {
       name: "bible-quiz-storage",
       partialize: (state) => ({
         leaderboard: state.leaderboard,
+        previousquestions: state.questions,
       }),
     }
   )

@@ -22,7 +22,7 @@ export const useGetQuestionsStore = create<QuizState>()(
       clearQuestions: () => set({ questions: [] }),
     }),
     {
-      name: "bible-quiz-storage",
+      name: "bible-quiz-storage-test",
     }
   )
 );

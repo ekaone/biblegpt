@@ -26,9 +26,12 @@ export default function Quiz() {
     addToLeaderboard,
     resetGame,
     setLeaderboard,
+    questions,
+    setQuestions,
+    // clearQuestions,
   } = useQuizStore();
 
-  const { questions, setQuestions } = useGetQuestionsStore();
+  // const { questions, setQuestions } = useGetQuestionsStore();
   const [gameState, setGameState] = useState<"playing" | "finished">("playing");
   const [playerName, setPlayerName] = useState("");
   const [showLeaderboard, setShowLeaderboard] = useState(false);
@@ -66,14 +69,14 @@ export default function Quiz() {
   };
 
   // const currentQuestion = bibleQuizQuestions[currentQuestionIndex];
-  const currentQuestion = questions;
+  // const currentQuestion = questions;
   // Check if questions are valid and available
   const hasValidQuestions =
     Array.isArray(questions) &&
     questions.length > 0 &&
     questions.every((q) => q && q.question && q.options && q.correctAnswer);
 
-  if (!currentQuestion) {
+  if (!questions) {
     return <div>Error: Question not found</div>;
   }
   const progress =
@@ -82,8 +85,7 @@ export default function Quiz() {
   const handleAnswerSelect = (answer: string) => {
     if (selectedAnswer) return;
 
-    const isCorrect =
-      answer === currentQuestion[currentQuestionIndex].correctAnswer;
+    const isCorrect = answer === questions[currentQuestionIndex].correctAnswer;
     setSelectedAnswer(answer);
     setIsAnswerCorrect(isCorrect);
 
@@ -162,7 +164,7 @@ export default function Quiz() {
                 progress={progress}
                 currentQuestionIndex={currentQuestionIndex}
                 bibleQuizQuestionsLength={bibleQuizQuestions.length}
-                currentQuestion={currentQuestion}
+                currentQuestion={questions}
                 selectedAnswer={selectedAnswer}
                 isAnswerCorrect={isAnswerCorrect}
                 handleAnswerSelect={handleAnswerSelect}
