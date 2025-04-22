@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useQuizStore } from "@/lib/store/quiz-store";
-import { useGetQuestionsStore } from "@/lib/store/quiz-get-questions-store";
 import { bibleQuizQuestions } from "@/data/bible-quiz-questions";
 import { Button } from "@/components/ui/button";
 import { Leaderboard } from "@/components/quiz/leaderboard";
@@ -68,8 +67,6 @@ export default function Quiz() {
     }
   };
 
-  // const currentQuestion = bibleQuizQuestions[currentQuestionIndex];
-  // const currentQuestion = questions;
   // Check if questions are valid and available
   const hasValidQuestions =
     Array.isArray(questions) &&
