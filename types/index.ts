@@ -16,6 +16,7 @@ export interface CourseData {
     id: string;
     avatar: string;
   }[];
+  category_color: string;
 }
 
 export interface User {

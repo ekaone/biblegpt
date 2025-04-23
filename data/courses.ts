@@ -16,6 +16,7 @@ export interface CourseData {
     id: string;
     avatar: string;
   }[];
+  category_color: string;
 }
 
 export interface User {
@@ -32,6 +33,13 @@ export interface User {
   enrolledCourses: string[];
 }
 
+/**
+ * Bible Study = Multi choice questions
+ * Scripture Analysis = Input form, and a textarea (Bible says about the topic)
+ * Theology = Learn the bible in 30 days
+ * Christian Living = How to read the bible
+ */
+
 export const courses: CourseData[] = [
   {
     id: "1",
@@ -43,6 +51,7 @@ export const courses: CourseData[] = [
       { id: "1", avatar: "https://randomuser.me/api/portraits/men/32.jpg" },
       { id: "2", avatar: "https://randomuser.me/api/portraits/women/44.jpg" },
     ],
+    category_color: "bg-pink-100",
   },
   {
     id: "2",
@@ -54,6 +63,7 @@ export const courses: CourseData[] = [
       { id: "3", avatar: "https://randomuser.me/api/portraits/women/68.jpg" },
       { id: "4", avatar: "https://randomuser.me/api/portraits/men/75.jpg" },
     ],
+    category_color: "bg-amber-100",
   },
   {
     id: "3",
@@ -65,6 +75,7 @@ export const courses: CourseData[] = [
       { id: "5", avatar: "https://randomuser.me/api/portraits/men/42.jpg" },
       { id: "6", avatar: "https://randomuser.me/api/portraits/women/65.jpg" },
     ],
+    category_color: "bg-purple-100",
   },
   {
     id: "4",
@@ -76,6 +87,7 @@ export const courses: CourseData[] = [
     instructors: [
       { id: "7", avatar: "https://randomuser.me/api/portraits/women/22.jpg" },
     ],
+    category_color: "bg-pink-100",
   },
   {
     id: "5",
@@ -87,6 +99,7 @@ export const courses: CourseData[] = [
       { id: "8", avatar: "https://randomuser.me/api/portraits/men/36.jpg" },
       { id: "9", avatar: "https://randomuser.me/api/portraits/women/48.jpg" },
     ],
+    category_color: "bg-emerald-100",
   },
 ];
 

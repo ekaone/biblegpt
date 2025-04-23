@@ -7,21 +7,6 @@ interface CourseCardProps {
   course: CourseData;
 }
 
-const getCategoryColor = (category: string): string => {
-  switch (category) {
-    case "Bible Study":
-      return "bg-pink-100";
-    case "Scripture Analysis":
-      return "bg-amber-100";
-    case "Theology":
-      return "bg-purple-100";
-    case "Christian Living":
-      return "bg-emerald-100";
-    default:
-      return "bg-gray-100";
-  }
-};
-
 const getCategoryIconBg = (category: string): string => {
   switch (category) {
     case "Bible Study":
@@ -42,12 +27,11 @@ const formatStudentCount = (count: number): string => {
 };
 
 const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
-  const categoryColor = getCategoryColor(course.category);
   const categoryIconBg = getCategoryIconBg(course.category);
 
   return (
     <div
-      className={`rounded-3xl p-5 ${categoryColor} h-full transition-transform duration-300 hover:scale-[1.02] cursor-pointer`}
+      className={`rounded-3xl p-5 ${course.category_color} h-full transition-transform duration-300 hover:scale-[1.02] cursor-pointer`}
     >
       <div className="flex items-start mb-1">
         <div

@@ -7,23 +7,23 @@ interface FeaturedCourseProps {
   course: CourseData;
 }
 
-const getCategoryColor = (category: string): string => {
-  switch (category) {
-    case "Bible Study":
-      return "bg-pink-100";
-    case "Scripture Analysis":
-      return "bg-amber-100";
-    case "Theology":
-      return "bg-purple-100";
-    case "Christian Living":
-      return "bg-emerald-100";
-    default:
-      return "bg-gray-100";
-  }
-};
+// const getCategoryColor = (category: string): string => {
+//   switch (category) {
+//     case "Bible Study":
+//       return "bg-pink-100";
+//     case "Scripture Analysis":
+//       return "bg-amber-100";
+//     case "Theology":
+//       return "bg-purple-100";
+//     case "Christian Living":
+//       return "bg-emerald-100";
+//     default:
+//       return "bg-gray-100";
+//   }
+// };
 
 const FeaturedCourse: React.FC<FeaturedCourseProps> = ({ course }) => {
-  const categoryColor = getCategoryColor(course.category);
+  // const categoryColor = getCategoryColor(course.category);
 
   return (
     <div className="mt-8">
@@ -31,7 +31,7 @@ const FeaturedCourse: React.FC<FeaturedCourseProps> = ({ course }) => {
         Featured course
       </h2>
       <div
-        className={`rounded-3xl p-6 ${categoryColor} transition-transform duration-300 hover:scale-[1.01] cursor-pointer`}
+        className={`rounded-3xl p-6 ${course.category_color} transition-transform duration-300 hover:scale-[1.01] cursor-pointer`}
       >
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">

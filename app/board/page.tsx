@@ -17,7 +17,7 @@ function App() {
   };
 
   // This would typically come from an API or be selected based on criteria
-  const featuredCourse = courses[3]; // Using the Interior Design course as featured
+  const featuredCourse = courses[3];
 
   return (
     <MainLayout>
