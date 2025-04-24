@@ -1,4 +1,8 @@
+"use client";
+
 import React from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
@@ -12,6 +16,17 @@ export default function Hero() {
           <strong>explore</strong> and <strong>understand</strong> the
           scriptures better.
         </p>
+        {/* Animated Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="mt-8 inline-block px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full shadow-md hover:from-blue-600 hover:to-pink-600 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300 drop-shadow-md"
+        >
+          <Link href="/board" passHref>
+            Go to Board
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
