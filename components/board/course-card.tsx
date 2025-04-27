@@ -5,6 +5,7 @@ import { Star, Users } from "lucide-react";
 
 interface CourseCardProps {
   course: CourseData;
+  onClick?: () => void;
 }
 
 const getCategoryIconBg = (category: string): string => {
@@ -26,12 +27,13 @@ const formatStudentCount = (count: number): string => {
   return count.toLocaleString("en-US");
 };
 
-const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ course, onClick }) => {
   const categoryIconBg = getCategoryIconBg(course.category);
 
   return (
     <div
       className={`rounded-3xl p-5 ${course.category_color} h-full transition-transform duration-300 hover:scale-[1.02] cursor-pointer`}
+      onClick={onClick}
     >
       <div className="flex items-start mb-1">
         <div
